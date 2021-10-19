@@ -14,7 +14,7 @@ class LaundryListController extends Controller
   
 
 		public function LandryListView(){
-             $this->data['allData']  = LaundryList::all();
+             $this->data['allData']  = LaundryList::simplePaginate(3);
 
             return view('backend.laundry_list.view_landry_list',$this->data);
 		}
@@ -37,11 +37,12 @@ class LaundryListController extends Controller
     	$laundry_id            = LaundryList::insertGetId([
             'customer_name'    => $request->customer_name,
             'remarks'          => $request->remarks,
+            'status'          => $request->status,
             'created_at'       => Carbon::now(),
     	]);
 
     	 LaundryItem::insertGetId([
-    		'laundry_id'             =>  $laundry_id,
+    		'laundry_id'             => $laundry_id,
     		'laundry_category_id'    => $request->laundry_category_id,
     		'weight'                 => $request->weight,
     		'unit_price'             => $request->unit_price,
@@ -51,7 +52,7 @@ class LaundryListController extends Controller
 
 
       Toastr::success('Data Successfully Saved :)' ,'Success');
-      return redirect()->back();
+      return redirect()->route('laundryList.view');
 
 
 		}

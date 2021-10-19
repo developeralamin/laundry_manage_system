@@ -38,11 +38,26 @@
 
 	@forelse($allData as $key => $laundry )
 			<tr class="text-white">
-				<td>{{ $key+1 }}</td>
+				<td>{{ $allData->firstItem()+$key }}</td>
 				<td><b>{{ date("M d, Y",strtotime($laundry->created_at))  }}</b></td>
 				<td><b>{{ $laundry->customer_name }}</b></td>
-				<td><b>{{ $laundry->customer_name }}</b></td>
-				<td><b>{{ $laundry->status }}</b></td>
+				<td><b>{{ $laundry->queue }}</b></td>
+				
+
+					@if($laundry->status == 'Pending')
+					<td class="text-center"><span class="badge badge-secondary">Pending</span></td>
+					@elseif($laundry->status == 'Processing')
+					<td class="text-center"><span class="badge badge-primary">Processing</span></td>
+					@elseif($laundry->status == 'Ready to Claim')
+					<td class="text-center"><span class="badge badge-info">Ready to Claim</span></td>
+
+					@elseif($laundry->status == 'Claimed')
+					<td class="text-center"><span class="badge badge-success">Claimed</span></td>
+
+
+					@endif
+
+			
 				
 				<td>
 <a href="{{ route('laundryList.edit',$laundry->id) }}" class="btn btn-xl btn-info">Edit</a>
@@ -61,15 +76,17 @@
    </tr>
 
 @endforelse
-							 
+						 
 			</tbody>
 			<tfoot>
 				 
 			</tfoot>
 		  </table>
+
 		</div>
 		</div>
 		<!-- /.box-body -->
+		 {{ $allData->links() }}	
 	  </div>
 	  <!-- /.box -->
 	       

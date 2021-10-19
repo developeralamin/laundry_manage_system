@@ -28,11 +28,28 @@
 	<div class="col-12">	
 
    <div class="row">
-		<div class="col-md-12" >		
+	 <div class="col-md-6" >		
 		<div class="form-group">
 			<h5>Customer Name<span class="text-danger">*</span></h5>
 			<div class="controls">
-				 <input type="text" name="customer_name"  class="form-control" >  
+				 <input type="text" name="customer_name"  class="custom-select browser-default" >  
+			</div>
+			 
+		</div>
+	</div><!-- End Col Md-6 -->
+
+
+	 <div class="col-md-6" >		
+		<div class="form-group">
+			<h5>Status<span class="text-danger">*</span></h5>
+			<div class="controls">
+				<select name="status" id="" class="custom-select browser-default">
+					<option value="">Select Type</option>
+					<option value="Pending">Pending</option>
+					<option value="Processing">Processing</option>
+					<option value="Ready to Claim">Ready to Claim</option>
+					<option value="Claimed">Claimed</option>
+				</select>
 			</div>
 			 
 		</div>
@@ -43,7 +60,7 @@
 			<h5>Remarks<span class="text-danger">*</span></h5>
 			<div class="controls">
 			
-				<textarea class="form-control" cols="7" rows="7" name="remarks"></textarea>
+				<textarea class="custom-select browser-default" cols="7" rows="7" name="remarks"></textarea>
 			</div>
 			 
 		</div>
@@ -76,7 +93,7 @@
 		<div class="form-group">
 			<h5>Weight<span class="text-danger">*</span></h5>
 			<div class="controls">
-				 <input type="number" min="1" value="1" name="weight"  onkeyup="getTotal()" id="weight"  class="form-control" >  
+				 <input type="number" min="1" value="0" name="weight"  onkeyup="getTotal()" id="weight"  class="custom-select browser-default" >  
 			</div>
 			 
 		</div>
@@ -96,10 +113,7 @@
 		</div>
 	</div><!-- End Col Md-6 -->
 
-    </div> <!-- End Row -->
-
-
-<div class="row">
+ 
 		<div class="col-md-6" >		
 		<div class="form-group">
 			<h5>Amount<span class="text-danger">*</span></h5>
@@ -112,7 +126,33 @@
 		</div>
 	</div><!-- End Col Md-6 -->
 
-    </div> <!-- End Row -->
+  </div> <!-- End Row -->
+
+<div class="row" id="payment">
+				<div class="col-md-6">
+					<div class="form-group">	
+						<label for="" class="control-label">Amount Tendered</label>
+						<input type="number" step="any" min="0"  class="form-control text-left" name="tendered">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">	
+						<label for="" class="control-label">Total Amount</label>
+						<input type="number"  onkeyup="getTotal()" step="any" min="1"  class="form-control text-left total_amount" id="total_amount" name="total_amount" readonly="">
+					</div>
+				</div>
+
+
+				<div class="col-md-6">
+					<div class="form-group">	
+						<label for="" class="control-label">Change</label>
+						<input type="number" step="any" min="1"  class="form-control text-left" name="change" readonly="">
+					</div>
+				</div>
+			</div>
+
+   
+  
 
 
 </div> <!-- End Col M12 -->
@@ -179,8 +219,10 @@
       var prod_price     = document.getElementById("prod_price").value;
       var weight         = document.getElementById("weight").value;
       if ( prod_price && weight ) {
-        var amount = prod_price * weight;
+        var amount        = prod_price * weight;
+        var total_amount  = prod_price * weight;
         document.getElementById("amount").value = amount;
+        document.getElementById("total_amount").value = total_amount;
       }
     }
 </script>
