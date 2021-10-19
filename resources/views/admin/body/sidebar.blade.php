@@ -20,7 +20,7 @@ $route  = Route::current()->getName();
 				  <!-- logo for regular state and mobile devices -->
 					 <div class="d-flex align-items-center justify-content-center">					 	
 						  <img src="../images/logo-dark.png" alt="">
-						  <h3><b>Laundry</b> Admin</h3>
+						  <h4><b>Laundry Management System</b></h4>
 					 </div>
 				</a>
 			</div>
@@ -30,7 +30,7 @@ $route  = Route::current()->getName();
       <ul class="sidebar-menu" data-widget="tree">  
 		  
 	   	  <li>
-          <a href="{{ url('/') }}">
+          <a href="{{ url('/home') }}">
             <i data-feather="pie-chart"></i>
 			<span>Dashboard</span>
           </a>
@@ -158,7 +158,7 @@ $route  = Route::current()->getName();
 	    	<li>
           <a class="dropdown-item" href="{{ route('logout') }}"
                              onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();" href="#">  <i data-feather="lock"></i> Logout</a>
+                               document.getElementById('logout-form').submit();" >  <i data-feather="lock"></i> Logout</a>
 
  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

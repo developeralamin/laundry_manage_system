@@ -15,14 +15,14 @@ class CreateLaundryListsTable extends Migration
     {
         Schema::create('laundry_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
-            $table->string('status')->default(0)->comment(' 0=Pending, 1 = ongoing,2= ready,3= claimed  ');
+            $table->string('customer_name')->null();
+            $table->string('status')->default('Pending')->comment(' 0=Pending, 1 = ongoing,2= ready,3= claimed  ');
             $table->string('queue')->default(1);
-            $table->string('total_amount');
-            $table->string('pay_status');
-            $table->string('amount_tendered');
-            $table->string('amount_change');
-            $table->string('remarks');
+            $table->string('total_amount')->null();
+            $table->string('pay_status')->default('Unpaid')->null();
+            $table->string('amount_tendered')->null();
+            $table->string('amount_change')->null();
+            $table->string('remarks')->null();
             $table->timestamps();
         });
     }

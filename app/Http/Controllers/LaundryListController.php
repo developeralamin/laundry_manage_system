@@ -37,7 +37,9 @@ class LaundryListController extends Controller
     	$laundry_id            = LaundryList::insertGetId([
             'customer_name'    => $request->customer_name,
             'remarks'          => $request->remarks,
-            'status'          => $request->status,
+            'status'           => $request->status,
+            'total_amount'     => $request->total_amount,
+            'amount_change'    => $request->amount_change,
             'created_at'       => Carbon::now(),
     	]);
 
@@ -79,18 +81,7 @@ class LaundryListController extends Controller
 		}
 
 
-public function findProductName(Request $request){
-
-		
-	    //if our chosen id and products table prod_cat_id col match the get first 100 data 
-
-        //$request->id here is the id of our chosen option id
-        // $data=LaundryItem::select('productname','id')->where('prod_cat_id',$request->id)->take(100)->get();
-        // return response()->json($data);//then sent this data to ajax success
-	}
-
-
-		//End mehtod
+  //useing jQuery select laundry price here
 
 	  public function findPrice(Request $request)
 	  {

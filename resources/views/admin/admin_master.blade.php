@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
-    <title>Sunny Admin - Dashboard</title>
+    <title>lms - Dashboard</title>
     
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
@@ -51,7 +51,7 @@
   	
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- Vendor JS -->
-	{{-- <script src="{{ asset('backend/js/vendors.min.js') }}"></script> --}}
+	<script src="{{ asset('backend/js/vendors.min.js') }}"></script>
     <script src="{{ asset('/') }}assets/icons/feather-icons/feather.min.js"></script>	
 	<script src="{{ asset('/') }}assets/vendor_components/easypiechart/dist/jquery.easypiechart.js"></script>
 	<script src="{{ asset('/') }}assets/vendor_components/apexcharts-bundle/irregular-data-series.js"></script>
