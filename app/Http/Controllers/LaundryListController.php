@@ -8,6 +8,8 @@ use App\Models\LaundryList;
 use App\Models\LaundryItem;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use DB;
+
 
 class LaundryListController extends Controller
 {
@@ -62,21 +64,65 @@ class LaundryListController extends Controller
 		//End mehtod
 
 
-		public function LandryListEdit(){
+		public function LandryListEdit($id){
+         $this->data['editData']             = LaundryList::findOrFail($id);
+         $this->data['editData2']             = LaundryItem::findOrFail($id);
+         $this->data['laundry_categorys']    = LaundryCategory::all();
+          return view('backend.laundry_list.edit_landry_list',$this->data);
+		}
+
+		//End mehtod
+
+
+		public function LandryListUpdate(Request $request ,$id){
+
+         $laundry_id            = LaundryList::findOrFail($id)->update([
+            'customer_name'    => $request->customer_name,
+            'remarks'          => $request->remarks,
+            'status'           => $request->status,
+            'total_amount'     => $request->total_amount,
+            'amount_change'    => $request->amount_change,
+            'created_at'       => Carbon::now(),
+    	]);
+
+    	LaundryItem::findOrFail($id)->update([
+    		'laundry_id'             => $laundry_id,
+    		'laundry_category_id'    => $request->laundry_category_id,
+    		'weight'                 => $request->weight,
+    		'unit_price'             => $request->unit_price,
+    		'amount'                 => $request->amount,
+             'created_at'            => Carbon::now(),
+    	]);
+
+
+      Toastr::success('Data Successfully Saved :)' ,'Success');
+      return redirect()->route('laundryList.view');
+
+
 
 		}
 
 		//End mehtod
 
 
-		public function LandryListUpdate(){
+		public function LandryListDelete($laundry_id){
 
-		}
+		$laundry_delete = LaundryList::findOrFail($laundry_id);
+		// $laundry_deletedf = LaundryItem::findOrFail($id);
+		//  LaundryList::where('id',$laundry_id)->delete();
+		$laundry_delete->delete();
 
-		//End mehtod
+  //     DB::table('laundry_lists')
 
 
-		public function LandryListDelete(){
+// DB::table("laundry_lists")->where("laundry_id", $id)->delete();
+// DB::table("laundry_items")->where("laundry_id", $laundry_id)->delete();
+
+
+		 Toastr::success('Data Successfully Delete :)' ,'Success');
+         return redirect()->route('laundryList.view');	
+
+
 
 		}
 

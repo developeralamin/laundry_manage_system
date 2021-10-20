@@ -142,8 +142,7 @@ $route  = Route::current()->getName();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="utilities_border.html"><i class="ti-more"></i>Border</a></li>
-            
+            <li><a href="utilities_border.html"><i class="ti-more"></i>Laundry Reports</a></li>
           </ul>
         </li>
 		  

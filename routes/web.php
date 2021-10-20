@@ -44,7 +44,7 @@ Route::get('/add',[LaundryListController::class,'LandryListAdd'])->name('laundry
 Route::post('/store',[LaundryListController::class,'LandryListStore'])->name('laundryList.store');
 Route::get('/edit/{id}',[LaundryListController::class,'LandryListEdit'])->name('laundryList.edit');
 Route::post('/update/{id}',[LaundryListController::class,'LandryListUpdate'])->name('laundryList.update');
-Route::get('/delete/{id}',[LaundryListController::class,'LandryListDelete'])->name('laundryList.delete');
+Route::get('/delete/{laundry_id}',[LaundryListController::class,'LandryListDelete'])->name('laundryList.delete');
 
 Route::get('/findProductName',[LaundryListController::class,'findProductName'])->name('findProductName');
 Route::get('/findPrice',[LaundryListController::class,'findPrice'])->name('findPrice');

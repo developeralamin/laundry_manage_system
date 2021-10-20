@@ -12,7 +12,7 @@
 		 <!-- Basic Forms -->
 		  <div class="box">
 			<div class="box-header with-border">
-			  <h4 class="box-title">New Laundry
+			  <h4 class="box-title">Update Laundry
 </h4>
 			  
 			</div>
@@ -21,7 +21,8 @@
 			  <div class="row">
 				<div class="col">
 
-	 <form method="post" action="{{ route('laundryList.store') }}">
+	 <form method="post" action="{{ route('laundryList.update',$editData->id) }}">
+
 	 	@csrf
 
 <div class="row">
@@ -32,7 +33,7 @@
 		<div class="form-group">
 			<h5>Customer Name<span class="text-danger">*</span></h5>
 			<div class="controls">
-				 <input type="text" name="customer_name"  class="custom-select browser-default" >  
+				 <input type="text" value="{{ $editData->customer_name }}" name="customer_name"  class="custom-select browser-default" >  
 			</div>
 			 
 		</div>
@@ -45,10 +46,10 @@
 			<div class="controls">
 				<select name="status" id="" class="custom-select browser-default">
 					
-					<option value="Pending">Pending</option>
-					<option value="Processing">Processing</option>
-					<option value="Ready to Claim">Ready to Claim</option>
-					<option value="Claimed">Claimed</option>
+					<option {{ ($editData->status == "Pending" ? "selected": "") }} value="Pending">Pending</option>
+					<option {{ ($editData->status == "Processing" ? "selected": "") }} value="Processing">Processing</option>
+					<option {{ ($editData->status == "Ready to Claim" ? "selected": "") }} value="Ready to Claim">Ready to Claim</option>
+					<option {{ ($editData->status == "Claimed" ? "selected": "") }} value="Claimed">Claimed</option>
 				</select>
 			</div>
 			 
@@ -60,7 +61,9 @@
 			<h5>Remarks<span class="text-danger">*</span></h5>
 			<div class="controls">
 			
-				<textarea class="custom-select browser-default" cols="7" rows="7" name="remarks"></textarea>
+				<textarea class="custom-select browser-default" cols="7" rows="7" name="remarks">
+					{{ $editData->remarks }}
+				</textarea>
 			</div>
 			 
 		</div>
@@ -78,7 +81,7 @@
 
 							@foreach($laundry_categorys as $laundry_category)
 
-							<option value="{{ $laundry_category->id }}">{{ $laundry_category->category_name }}</option>
+				<option {{ $editData->laundry_category_id =$laundry_category->id ?'selected' :"" }} value="{{ $laundry_category->id }}">{{ $laundry_category->category_name }}</option>
 
 							@endforeach
 				</select>
@@ -93,7 +96,7 @@
 		<div class="form-group">
 			<h5>Weight<span class="text-danger">*</span></h5>
 			<div class="controls">
-				 <input type="number" min="1" value="0" name="weight"  onkeyup="getTotal()" id="weight"  class="custom-select browser-default" >  
+				 <input type="number" min="1" value="{{ $editData2->weight }}" name="weight"  onkeyup="getTotal()" id="weight"  class="custom-select browser-default" >  
 			</div>
 			 
 		</div>
@@ -106,8 +109,8 @@
 			<h5>Unit Price<span class="text-danger">*</span></h5>
 			<div class="controls">
 
-         <input onkeyup="getTotal()" type="text" name="unit_price" class="form-control prod_price " 
-            id="prod_price" value="0">
+         <input onkeyup="getTotal()" type="text"  name="unit_price" class="form-control prod_price " 
+            id="prod_price" value="{{ $editData2->unit_price }}">
 
 			</div>
 		</div>
@@ -120,7 +123,7 @@
 			<div class="controls">
 
          <input onkeyup="getTotal()" name="amount" type="text" class="form-control amount" 
-            id="amount" value="0">
+            id="amount" value="{{ $editData2->amount }}">
 
 			</div>
 		</div>
