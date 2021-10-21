@@ -204,17 +204,21 @@
 
  //some javascript for price * weight == total_amount
 const $$ = (el) => document.querySelector(el);
+
  function getTotal() {
       var prod_price     = document.getElementById("prod_price").value;
       var weight         = document.getElementById("weight").value;
       // if ( prod_price && weight ) {
         var amount        = prod_price * weight;
         var total_amount  = prod_price * weight;
-        // var amount_change  = (prod_price * weight);
+       
+
         const amount_tendered = $$('#amount_tendered')
         const amount_change = $$('#amount_change')
         const temp = amount_tendered.value - total_amount;
         amount_change.value = temp
+
+        
         //console.log(temp)
         document.getElementById("amount").value = amount;
         document.getElementById("total_amount").value = total_amount;

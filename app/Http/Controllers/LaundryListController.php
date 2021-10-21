@@ -42,6 +42,7 @@ class LaundryListController extends Controller
             'status'           => $request->status,
             'total_amount'     => $request->total_amount,
             'amount_change'    => $request->amount_change,
+            'amount_tendered'    => $request->amount_tendered,
             'created_at'       => Carbon::now(),
     	]);
 
