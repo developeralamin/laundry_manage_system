@@ -5,6 +5,8 @@ use App\Http\Controllers\LaundryCategorYController;
 use App\Http\Controllers\LaundryListController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,35 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/logout',[UserLogoutController::class,'Logout'])->name('admin.logout');
+
+Route::prefix('user')->group(function (){
+
+Route::get('/view',[UserController::class,'ViewUser'])->name('user.view');
+Route::get('/add',[UserController::class,'AddUser'])->name('user.add');
+Route::post('/store',[UserController::class,'StoreUser'])->name('user.store');
+Route::get('/edit/{id}',[UserController::class,'EditUser'])->name('user.edit');
+Route::post('/update/{id}',[UserController::class,'UserUpdate'])->name('user.update');
+Route::get('/delete/{id}',[UserController::class,'UserDelete'])->name('user.delete');
+
+});
+
+
+Route::prefix('profile')->group(function (){
+
+Route::get('/view',[ProfileController::class,'ViewProfile'])->name('profile.view');
+Route::get('/edit',[ProfileController::class,'EditProfile'])->name('profile.edit');
+Route::post('/store',[ProfileController::class,'StoreProfile'])->name('profile.store');
+Route::get('/password/view',[ProfileController::class,'PasswordView'])->name('password.view');
+Route::post('/password/update',[ProfileController::class,'PasswordUpdate'])->name('passwrd.update');
+
+});
+
+
+
+
+
 
 Route::prefix('laundry')->group(function (){
 
