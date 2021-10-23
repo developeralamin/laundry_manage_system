@@ -45,10 +45,10 @@
 			<div class="controls">
 				<select name="status" id="" class="custom-select browser-default">
 
-					<option value="Pending">Pending</option>
-					<option value="Processing">Processing</option>
-					<option value="Ready to Claim">Ready to Claim</option>
-					<option value="Claimed">Claimed</option>
+					<option value="0">Pending</option>
+					<option value="1">Processing</option>
+					<option value="2">Ready to Claim</option>
+					<option value="3">Claimed</option>
 				</select>
 			</div>
 
@@ -129,7 +129,7 @@
   </div> <!-- End Row -->
            <div class="form-group">
 					<div class="custom-control " id="pay-switch">
-					  <input type="checkbox" class="custom-control-input" value="1" name="pay_status" id="paid" >
+					  <input type="checkbox" class="custom-control-input" value="3" name="pay_status" id="paid" >
 					  <label class="custom-control-label" for="paid">Pay</label>
 					</div>
 				</div>
@@ -141,13 +141,13 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="" class="control-label">Amount Tendered</label>
-						<input type="number"  value="<?php echo isset($amount_tendered) ? $amount_tendered : 0 ?>" step="any" min="0"  class="form-control text-left amount_tendered"  name="amount_tendered" id="amount_tendered">
+						<input type="number"  step="any" min="0"  class="form-control text-left amount_tendered"  name="amount_tendered" id="amount_tendered">
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="" class="control-label">Total Amount</label>
-						<input type="number" value="<?php echo isset($total_amount) ? $total_amount : 0 ?>" onkeyup="getTotal()" step="any" min="1"  class="form-control text-left total_amount" id="total_amount" name="total_amount" readonly="">
+						<input type="number"  onkeyup="getTotal()" step="any" min="1"  class="form-control text-left total_amount" id="total_amount" name="total_amount" readonly="">
 					</div>
 				</div>
 
@@ -155,7 +155,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="" class="control-label">Change</label>
-						<input type="number" value="<?php echo isset($amount_change) ? $amount_change : 0 ?>" step="any" min="1"  class="form-control text-left" name="amount_change" id="amount_change" readonly="">
+						<input type="number"  step="any" min="1"  class="form-control text-left" name="amount_change" id="amount_change" readonly="">
 					</div>
 				</div>
 			</div>
@@ -203,12 +203,14 @@
 <script type="text/javascript">
 
  //some javascript for price * weight == total_amount
+
+ 
 const $$ = (el) => document.querySelector(el);
 
  function getTotal() {
       var prod_price     = document.getElementById("prod_price").value;
       var weight         = document.getElementById("weight").value;
-      // if ( prod_price && weight ) {
+
         var amount        = prod_price * weight;
         var total_amount  = prod_price * weight;
        
@@ -222,13 +224,10 @@ const $$ = (el) => document.querySelector(el);
         //console.log(temp)
         document.getElementById("amount").value = amount;
         document.getElementById("total_amount").value = total_amount;
-        // document.getElementById("amount_change").value = amount_change;
-
-	    // var amount_tendered = total_amount - amount_change;
-
-      // }
+        
     }
 
+//tendered section 
 const amount_tendered = $$('#amount_tendered')
 amount_tendered.addEventListener('keyup',(e)=>{
     const total_amount = $$('#total_amount').value

@@ -21,6 +21,16 @@ class InventoryController extends Controller
 
 	}
 	//End method
+	
+//in out list
+
+	public function inventoryINOut()
+	{
+		$this->data['allData']  = Inventory::get();
+        return view('backend.invenotry.inventory_supply_in_out_cat',$this->data);
+	}
+
+
 
 
 	public function inventoryAdd(){
@@ -75,13 +85,7 @@ class InventoryController extends Controller
 	}
 	//End method
 
-//in out list
 
-	public function inventoryINOut()
-	{
-		$this->data['allData']  = Inventory::get();
-        return view('backend.invenotry.inventory_supply_in_out_cat',$this->data);
-	}
 
 
 }

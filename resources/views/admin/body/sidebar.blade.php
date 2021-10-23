@@ -133,7 +133,7 @@ $route  = Route::current()->getName();
           </ul>
         </li>
 		  
-        <li class="treeview">
+        <li class="treeview  {{ ($prefix == '/report')?'active' : '' }}">
           <a href="#">
             <i data-feather="package"></i>
             <span>Reports</span>
@@ -142,7 +142,7 @@ $route  = Route::current()->getName();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="utilities_border.html"><i class="ti-more"></i>Laundry Reports</a></li>
+             <li  class="{{ ($route == 'report.view')?'active':'' }}"><a href="{{ route('report.view') }}"><i class="ti-more"></i>Report View</a></li>
           </ul>
         </li>
 		  

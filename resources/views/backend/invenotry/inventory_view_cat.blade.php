@@ -5,11 +5,6 @@
  <div class="content-wrapper">
 	  <div class="container-full">
 		<!-- Content Header (Page header) -->
-
-
-
-
-
 	 @php
  	  
        // $user_ip = $_SERVER['REMOTE_ADDR'];
@@ -50,14 +45,11 @@
 @endphp
 
 
+
+
 			@forelse($allData as $key=>$data )						
 				
-	{{-- 	@php
-       
-         dd($data)
-
-		@endphp
- --}}
+	
 			<tr class="text-white">
 		               	<tr>
 								<td class="text-center">{{ $key+1 }}</td>
@@ -67,11 +59,11 @@
 		@if (DB::table('inventories')->where('stock_note',1)->count())
 		
 
-	     <td class="text-right">{{ $data->sum('qty') }}</td>
+	        <td class="text-right">{{ $data->sum('qty') }}</td>
 
-@else
- 
-@endif
+		@else
+		 
+		@endif
 
 							</tr>
 				 

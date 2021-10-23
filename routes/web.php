@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/logout',[UserLogoutController::class,'Logout'])->name('admin.logout');
+
+
+
+
 
 Route::prefix('user')->group(function (){
 
@@ -111,3 +116,14 @@ Route::post('/update/{id}',[InventoryController::class,'inventoryUpdate'])->name
 Route::get('/delete/{id}',[InventoryController::class,'inventoryDelete'])->name('inventory.delete');
 
 });
+
+
+//End method
+Route::prefix('report')->group(function (){
+
+Route::get('/view',[ReportsController::class,'reportView'])->name('report.view');
+
+
+
+});
+
