@@ -70,7 +70,18 @@ $route  = Route::current()->getName();
 				  
 		 
         <li class="header nav-small-cap">User Interface</li>
-		  
+		      <li class="treeview  {{ ($prefix == '/report')?'active' : '' }}">
+          <a href="#">
+            <i data-feather="package"></i>
+            <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li  class="{{ ($route == 'report.view')?'active':'' }}"><a href="{{ route('report.view') }}"><i class="ti-more"></i>Report View</a></li>
+          </ul>
+        </li>
 
          <li class="treeview {{ ($prefix == '/laundry')?'active' : '' }}">
           <a href="#">
@@ -133,18 +144,7 @@ $route  = Route::current()->getName();
           </ul>
         </li>
 		  
-        <li class="treeview  {{ ($prefix == '/report')?'active' : '' }}">
-          <a href="#">
-            <i data-feather="package"></i>
-            <span>Reports</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-             <li  class="{{ ($route == 'report.view')?'active':'' }}"><a href="{{ route('report.view') }}"><i class="ti-more"></i>Report View</a></li>
-          </ul>
-        </li>
+    
 		  
 	
 		  

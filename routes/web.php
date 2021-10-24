@@ -130,7 +130,7 @@ Route::get('/delete/{id}',[InventoryController::class,'inventoryDelete'])->name(
 Route::prefix('report')->group(function (){
 
 Route::get('/view',[ReportsController::class,'reportView'])->name('report.view');
-Route::post('/view',[ReportsController::class,'GetreportView'])->name('GetreportView.view');
+Route::get('/pay_slip/{laundery_id}',[ReportsController::class,'GetreportView'])->name('GetreportView.view');
 
 });
 

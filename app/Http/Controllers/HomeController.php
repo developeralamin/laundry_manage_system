@@ -26,11 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $totalProfitToday = LaundryList::whereDate('created_at', today())->sum('total_amount');
-
         $totalcustomer = LaundryList::whereDate('created_at', today())->count('id');
-
         $totalClaimedcustomer = LaundryList::where('status',3)->whereDate('created_at', today())->count();
-
-        return view('admin.index',compact('totalProfitToday','totalcustomer','totalClaimedcustomer'));
+    return view('admin.index',compact('totalProfitToday','totalcustomer','totalClaimedcustomer'));
+    
     }
 }

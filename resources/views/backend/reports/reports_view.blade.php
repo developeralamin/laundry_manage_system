@@ -22,7 +22,7 @@
 				<!-- /.box-header -->
 		<div class="box-body">
 			
-	<form method="post" action="{{ route('report.view') }}">
+	<form method="get" action="{{ route('report.view') }}">
 
 	 	@csrf
 <div class="row clearfix page_header">
@@ -33,14 +33,14 @@
 			    <div class="col-auto">
 			      	<label class="sr-only" for="inlineFormInput">Start Date</label>
 			      
-			      	<input type="date" value="{{ date('Y-m-d') }}" name="from" class="form-control">
+			      	<input type="date" value="start_date" name="start_date" class="form-control">
 			    </div>
 
 			    <div class="col-auto">
 			      	<label class="sr-only" for="inlineFormInputGroup">End Date</label>
 			      	<div class="input-group mb-2">
 			        
-			        	<input type="date" value="{{ date('Y-m-d') }}" name="to" class="form-control">
+			        	<input type="date" value="end_date" name="end_date" class="form-control">
 			      	</div>
 			    </div>
 
@@ -68,17 +68,21 @@
 	            	<th>Date</th>
 	              	<th>Customer Name</th>
 	              	<th>Total Amount</th>
+	              	{{-- <th>Actions</th> --}}
 	            </tr>
 	          </thead>
 	          
 	          <tbody>
 	          	 @foreach($data as $key=>$data)
+
+
  
                 <tr class="text-white">
-				<td>{{ $key+1 }}</td>
-				{{-- <td><b>{{ date("M d, Y",strtotime($laundry->created_at))  }}</b></td> --}}
+				<td>{{  date("M d, Y",strtotime($data['created_at'])) }}</td>
 				<td><b>{{ $data->customer_name }}</b></td>
-				<td><b>{{ $data->total_amount }}</b></td>
+				<td class="text-right"><b>{{ number_format($data['total_amount'],2) }}</b></td>
+
+		
 		
 			       </tr>
 	          	 @endforeach
@@ -86,6 +90,19 @@
 
 	          </tbody>
 
+	      @php
+								
+	$totalProfitToday=0;
+     $totalProfitToday = DB::table('laundry_lists')->whereBetween('created_at',[$start_date,$end_date])->sum("total_amount");
+		// $total += $totalProfitToday['total_amount'];
+
+		@endphp
+                <tfoot>
+					<tr>
+						<td class="text-right" colspan="2">Total</td>
+						<td class="text-right">{{ number_format($totalProfitToday,2) }} </td>
+					</tr>
+				</tfoot>
 
 	        </table>
 	      </div>
