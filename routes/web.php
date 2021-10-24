@@ -24,7 +24,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Auth::routes();
+//prevent browser back button
+
+Route::group(['middleware' => 'prevent-back-history'],function(){
+
+
+// Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -32,6 +38,8 @@ Route::get('/admin/logout',[UserLogoutController::class,'Logout'])->name('admin.
 
 
 
+Route::group(['middleware' => 'auth'],function(){
+//group middleware
 
 
 Route::prefix('user')->group(function (){
@@ -122,8 +130,12 @@ Route::get('/delete/{id}',[InventoryController::class,'inventoryDelete'])->name(
 Route::prefix('report')->group(function (){
 
 Route::get('/view',[ReportsController::class,'reportView'])->name('report.view');
-
-
+Route::post('/view',[ReportsController::class,'GetreportView'])->name('GetreportView.view');
 
 });
 
+
+});//end group middleware
+
+
+});//prevent back browser back button

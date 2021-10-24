@@ -27,7 +27,7 @@
                 <div class="row justify-content-center no-gutters">
 <div class="col-lg-4 col-md-5 col-12">
     <div class="content-top-agile ">
-        <h2 class="text-white">System</h2>
+        <h2 class="text-white">Laundry Management System</h2>
         <p class="text-white-50">Sign in to start your session</p>                          
     </div>
     <div class="p-30 rounded30 box-shadowed b-2 b-dashed">

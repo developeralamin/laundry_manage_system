@@ -44,14 +44,14 @@
 				<td><b>{{ $laundry->queue }}</b></td>
 				
 
-					@if($laundry->status == 'Pending')
+					@if($laundry->status == '0')
 					<td class="text-center"><span class="badge badge-secondary">Pending</span></td>
-					@elseif($laundry->status == 'Processing')
+					@elseif($laundry->status == '1')
 					<td class="text-center"><span class="badge badge-primary">Processing</span></td>
-					@elseif($laundry->status == 'Ready to Claim')
+					@elseif($laundry->status == '2')
 					<td class="text-center"><span class="badge badge-info">Ready to Claim</span></td>
 
-					@elseif($laundry->status == 'Claimed')
+					@elseif($laundry->status == '3')
 					<td class="text-center"><span class="badge badge-success">Claimed</span></td>
 
 
