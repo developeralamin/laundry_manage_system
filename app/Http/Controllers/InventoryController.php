@@ -10,14 +10,32 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
+
 {
     
 
 	public function inventoryView(){
+		$inventories = [];
+		$inventoriesGrouped = Inventory::select(['supply_id','stock_note',DB::raw('SUM(qty) as summed')])->groupBy(['supply_id','stock_note'])->get();
+
+		foreach($inventoriesGrouped as $inventory) {
+			if (isset($inventories[$inventory->supply_id])) {
+				if($inventory->stock_note == 1) {
+					$inventories[$inventory->supply_id]->summed += $inventory->summed;
+				} else {
+					$inventories[$inventory->supply_id]->summed -= $inventory->summed;
+				}
+			} else {
+				$inventories[$inventory->supply_id] = $inventory;
+			}
+		}
+
+$supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->get()->keyBy('id');
+
 		
-		  $allData = Inventory::get();
+		  //$allData = Inventory::get();
            // $this->data['products']=Product::where('stock_note',1)->get();
-        return view('backend.invenotry.inventory_view_cat',compact('allData'));
+        return view('backend.invenotry.inventory_view_cat',compact('inventories','supplies'));
 
 	}
 	//End method
@@ -26,6 +44,8 @@ class InventoryController extends Controller
 
 	public function inventoryINOut()
 	{
+
+
 		$this->data['allData']  = Inventory::get();
         return view('backend.invenotry.inventory_supply_in_out_cat',$this->data);
 	}

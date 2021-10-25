@@ -33,38 +33,22 @@
 							</thead>
 								<tbody>
 @php
-	// $i = 1;
-	// $supply = $conn->query("SELECT * FROM supply_list order by name asc");
-	// while($row=$supply->fetch_assoc()):
-	// 	$sup_arr[$row['id']] = $row['name'];
-	// $inn = $conn->query("SELECT sum(qty) as inn FROM inventory where stock_type = 1 and supply_id = ".$row['id']);
-	// $inn = $inn && $inn->num_rows > 0 ? $inn->fetch_array()['inn'] : 0;
-	// $out = $conn->query("SELECT sum(qty) as `out` FROM inventory where stock_type = 2 and supply_id = ".$row['id']);
-	// $out = $out && $out->num_rows > 0 ? $out->fetch_array()['out'] : 0;
-	// $available = $inn - $out;
+	
 @endphp
 
-
-
-
-			@forelse($allData as $key=>$data )						
-				
-	
+			@forelse($inventories as $key=>$inventory )						
+			
 			<tr class="text-white">
 		               	<tr>
 								<td class="text-center">{{ $key+1 }}</td>
-								<td class="">{{ $data['supply']['supply_name'] }}</td>
+								<td class="">{{ $supplies[$inventory->supply_id]->supply_name }}</td>
 								
-	
-		@if (DB::table('inventories')->where('stock_note',1)->count())
-		
-
-	        <td class="text-right">{{ $data->sum('qty') }}</td>
-
-		@else
-		 
-		@endif
-
+			{{-- @if(DB::table('inventories')->where('stock_note',1)->count())
+					     <td class="text-right">{{ $data->sum('qty') }}</td>
+			@elseif(DB::table('inventories')->where('stock_note',2)->count())
+			 <td class="text-right">{{ $data->sub('qty') }}</td>
+			@endif --}}
+			<td>{{ $inventory->summed }}</td>
 							</tr>
 				 
 			</tr>
