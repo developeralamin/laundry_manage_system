@@ -30,11 +30,8 @@ class InventoryController extends Controller
 			}
 		}
 
-$supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->get()->keyBy('id');
+    $supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->get()->keyBy('id');
 
-		
-		  //$allData = Inventory::get();
-           // $this->data['products']=Product::where('stock_note',1)->get();
         return view('backend.invenotry.inventory_view_cat',compact('inventories','supplies'));
 
 	}
@@ -54,7 +51,7 @@ $supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->ge
 
 
 	public function inventoryAdd(){
-		$this->data['supplies'] = Supply::all();
+		 $this->data['supplies'] = Supply::all();
 		 return view('backend.invenotry.inventory_add_cat',$this->data);
 
 	}
@@ -73,10 +70,10 @@ $supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->ge
             'supply_id'   =>$request->supply_id,
             'qty'         =>$request->qty,
             'stock_note'  =>$request->stock_note,
+             'created_at'       => Carbon::now(),
 		 ]);
         
-		  // Inventory::findOrFail($item->product_id)->decrement('product_quantity',$item->product_quantity);
-    //     $item->delete();
+	
 
       Toastr::success('Data Successfully Saved :)' ,'Success');
       return redirect()->route('InOutList.view');
@@ -85,22 +82,40 @@ $supplies = Supply::whereIn('id', collect($inventories)->pluck('supply_id'))->ge
 	//End method
 
 
-	public function inventoryEdit(){
+	public function inventoryEdit($id){
 
-
-	}
-	//End method
-
-
-	public function inventoryUpdate(){
-
+		 // $this->data['supplies'] = Supply::all();
+		 // $this->data['editData']  = Inventory::get();
+   //      return view('backend.invenotry.edit_inventory_supply_in_out_cat',$this->data);
 
 	}
 	//End method
 
 
-	public function inventoryDelete(){
+	public function inventoryUpdate(Request $request ,$id){
 
+	// Inventory::findOrFail($id)->update([
+ //            'supply_id'   =>$request->supply_id,
+ //            'qty'         =>$request->qty,
+ //            'stock_note'  =>$request->stock_note,
+ //             'update_at'       => Carbon::now(),
+	// 	 ]);
+        
+	
+
+ //      Toastr::success('Data Successfully Saved :)' ,'Success');
+ //      return redirect()->route('InOutList.view');
+	}
+	//End method
+
+
+	public function inventoryDelete($id){
+      
+      $delete = Inventory::findOrFail($id);
+      $delete->delete();
+
+       Toastr::success('Data Successfully Saved :)' ,'Success');
+      return redirect()->route('InOutList.view');
 
 	}
 	//End method

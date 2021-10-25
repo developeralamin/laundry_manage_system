@@ -35,11 +35,12 @@
 @php
 	
 @endphp
+{{-- @dump($inventories) --}}
 
 			@forelse($inventories as $key=>$inventory )						
 			
-			<tr class="text-white">
-		               	<tr>
+			<tr  class="text-white">
+		               	<tr class="text-white">
 								<td class="text-center">{{ $key+1 }}</td>
 								<td class="">{{ $supplies[$inventory->supply_id]->supply_name }}</td>
 								

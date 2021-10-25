@@ -16,7 +16,7 @@ class LaundryListController extends Controller
   
 
 		public function LandryListView(){
-             $this->data['allData']  = LaundryList::simplePaginate(3);
+             $this->data['allData']  = LaundryList::simplePaginate(6);
 
             return view('backend.laundry_list.view_landry_list',$this->data);
 		}
@@ -35,7 +35,21 @@ class LaundryListController extends Controller
 
 
 		public function LandryListStore(Request $request){
-
+        
+         $validata = $request->validate([
+        'customer_name'       => 'required',
+        'remarks'             => 'required',
+        'status'              => 'required',
+        'total_amount'        => 'required',
+        'amount_change'       => 'required',
+        'amount_tendered'     => 'required',
+        'laundry_id'          => 'required',
+        'laundry_category_id' => 'required',
+        'weight'              => 'required',
+        'amount'              => 'required',
+        
+       ]);  
+           
     	$laundry_id            = LaundryList::insertGetId([
             'customer_name'    => $request->customer_name,
             'remarks'          => $request->remarks,
@@ -52,7 +66,7 @@ class LaundryListController extends Controller
     		'weight'                 => $request->weight,
     		'unit_price'             => $request->unit_price,
     		'amount'                 => $request->amount,
-             'created_at'            => Carbon::now(),
+        'created_at'            => Carbon::now(),
     	]);
 
 

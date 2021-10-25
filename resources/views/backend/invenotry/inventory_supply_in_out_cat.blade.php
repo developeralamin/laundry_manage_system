@@ -29,8 +29,9 @@
 		<tbody>
 	@forelse($allData as $key => $inventory )
 			<tr class="text-white">
+
 				<td>{{ $key+1 }}</td>
-				<td><b>{{ date("Y-m-d",strtotime($inventory['created_at'])) }}</b></td>
+				<td><b>{{  date("M d, Y",strtotime($inventory['created_at'])) }}</b></td>
 				<td><b>{{ $inventory['supply']['supply_name'] }}</b></td>
 				<td  class="text-right"><b>{{ $inventory->qty }}</b></td>
 	
@@ -44,7 +45,7 @@
 				@endif	
 
 				<td>
-   <a href="{{ route('inventory.edit',$inventory->id) }}" class="btn btn-sm btn-info">Edit</a>
+   {{-- <a href="{{ route('inventory.edit',$inventory->id) }}" class="btn btn-sm btn-info">Edit</a> --}}
    <a href="{{ route('inventory.delete',$inventory->id) }}" class="btn btn-sm btn-danger" id="delete">Delete</a>
 
 				</td>
@@ -55,7 +56,7 @@
 
    <tr>
    	<td colspan="50" class="text-center">
-   		You haven't no course item
+   		You haven't no laundry item
    	</td>
    </tr>
 

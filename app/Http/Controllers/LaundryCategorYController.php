@@ -43,19 +43,36 @@ class LaundryCategorYController extends Controller
 
 		//End method
 
-		public function LandryEdit(){
+		public function LandryEdit($id){
+           
+			$this->data['editData']  = LaundryCategory::findOrFail($id);
+           return view('backend.landry_cat.edit_cat',$this->data);
+		}
+
+		//End method
+
+		public function LandryUpdate(Request $request ,$id){
+
+            LaundryCategory::findOrFail($id)->update([
+            'category_name' =>$request->category_name,
+             'price'       =>$request->price,
+
+		  ]);
+
+      Toastr::success('Data Successfully Saved :)' ,'Success');
+      return redirect()->route('laundry.view');
 
 		}
 
 		//End method
 
-		public function LandryUpdate(){
+		public function LandryDelete($id){
 
-		}
+			$delete = LaundryCategory::findOrFail($id);
+			$delete->delete();
 
-		//End method
-
-		public function LandryDelete(){
+			 Toastr::success('Data Successfully Saved :)' ,'Success');
+             return redirect()->route('laundry.view');
 
 		}
 
